@@ -139,7 +139,8 @@
                                     <p class="date"><span th:text="${#temporals.format(answer.createTime, 'yy년 MM월 dd일 HH:mm')}"></span></p>
                                  </div>
                                  <div th:if="${session.user.userId}==${answer.writer.userId}">
-                                    <a th:href="@{'/questions/{qid}/answers/del/{id}'(qid=${question.id},id=${answer.id})}" class="btn-reply text-uppercase">삭제</a>
+                                    <a th:href="@{'/questions/{qid}/answers/del/{id}'(qid=${question.id},id=${answer.id})}" class="btn-reply text-uppercase">
+                                    <font color="red">삭제</font></a>
                                  </div>
                               </div>
                            </div>
