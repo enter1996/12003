@@ -6,6 +6,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -37,12 +39,10 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public List<Question> getQuestions() {
-		/*
-		 * 1. Repository로 부터 모든 자료를 가져와 Enitiy 리스트에 저장한다.
-		 * 2. 
-		 */
-		List<QuestionEntity> entities = repository.findAll(new Sort(Sort.Direction.DESC, "createTime"));
+	public List<Question> getQuestions(Long pageNo) {
+
+		PageRequest pageRequest = PageRequest.of((int) (pageNo - 1), 3, new Sort(Sort.Direction.DESC, "id"));
+		Page<QuestionEntity> entities = repository.findAll(pageRequest);
 		
 		List<Question> questions = new ArrayList<Question>();
 		for(QuestionEntity entity : entities) {
@@ -51,6 +51,17 @@ public class QuestionServiceImpl implements QuestionService {
 		}
 		return questions;			
 	}
+	
+	public List<Question> getQuestions(PageRequest pageRequest) {
+		List<Question> questions = new ArrayList<Question>();
+		Page<QuestionEntity> entities = repository.findAll(pageRequest);
+		for(QuestionEntity entity : entities) {
+			Question question = entity.buildDomain();
+			questions.add(question);
+		}
+		return questions;
+	}
+	
 
 	@Override
 	public List<Question> getQuestionsByUser(String name) {

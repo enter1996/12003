@@ -51,7 +51,16 @@
                                     <li><a href="#"><i class="far fa-user"></i> <span th:text="${question.writer.userId}"></span></a></li>
                                     <li><a href="#"><i class="far fa-clock"></i> <span th:text="${#temporals.format(question.createTime, 'YY-MM-dd HH:mm')}"></span></a></li>
                                     <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
+                                    
                                 </ul>
+                                <div align="right">
+                                <ul>
+                                <li th:if="${session.user.userId}==${question.writer.userId}">
+                                <a th:href="@{'/questions/edit/{id}'(id=${question.id})}" class="genric-btn success">수정</a>
+                                <a th:href="@{'/questions/del/{id}'(id=${question.id})}" class="genric-btn primary">삭제</a>                    
+                                </li>
+                                </ul>
+                                </div>
                             </div>
                         </article>
 						<a href="/questions/form" class="btn_3">질문 쓰기 <span class="flaticon-slim-right"></span> </a>

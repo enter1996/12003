@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import iducs.springboot.board.domain.Question;
 import iducs.springboot.board.domain.User;
 import iducs.springboot.board.service.UserService;
 
@@ -29,13 +30,21 @@ public class UserController {
 		userService.saveUser(formUser); 
 		model.addAttribute("user", formUser);
 		return "redirect:/users";
-	}	
-	@GetMapping("")
-	public String getUsers(Model model, HttpSession session, Long pageNo) { //@PathVariable(value = "pageNo") Long pageNo) {
+	}
+	
+	@GetMapping("/page/{pageNo}")
+	public String getUsers(Model model, HttpSession session, @PathVariable(value = "pageNo") Long pageNo) {
 		System.out.println(pageNo);
 		model.addAttribute("users", userService.getUsers(pageNo));
 		return "/users/list";
 	}	
+	
+	@GetMapping("")
+	public String userRedirect() { 
+		return "redirect:/users/page/1";
+	}	
+	
+	
 	@GetMapping("/{id}")
 	public String getUserById(@PathVariable(value = "id") Long id, Model model) {
 		User user = userService.getUserById(id);
@@ -54,11 +63,14 @@ public class UserController {
 		session.setAttribute("user", user);
 		return "/users/info";
 	}	
-	@DeleteMapping("/{id}")
-	public String deleteUserById(@PathVariable(value = "id") Long id, @Valid User formUser, Model model) {
-		userService.deleteUser(formUser);
-		model.addAttribute("name", formUser.getName());
-		return "/users/withdrawal";
+	
+	@GetMapping("/del/{id}")
+	public String deleteUserById(@PathVariable(value = "id") Long id, Model model,HttpSession session) {
+		User user = userService.getUserById(id);
+		userService.deleteUser(user);
+		model.addAttribute("name", user.getName());
+		session.invalidate();
+		return "redirect:/";
 	}
 	
 	/*

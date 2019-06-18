@@ -29,15 +29,22 @@ import iducs.springboot.board.service.UserService;
 
 @Controller
 @RequestMapping("/questions")
-public class QuerstionController {
+
+public class QuestionController {
 	@Autowired QuestionService questionService; // 의존성 주입(Dependency Injection) : 
 	
-	@GetMapping("")
-	public String getAllUser(Model model, HttpSession session) {
-		List<Question> questions = questionService.getQuestions();
+	@GetMapping("/page/{pageNo}")
+	public String getAllUser(Model model, HttpSession session, @PathVariable(value = "pageNo") Long pageNo) {
+		List<Question> questions = questionService.getQuestions(pageNo);
 		model.addAttribute("questions", questions);
 		return "/questions/list"; 
 	}	
+	
+	@GetMapping("")
+	public String userRedirect() { 
+		return "redirect:/questions/page/1";
+	}	
+	
 	
 	@PostMapping("")
 	// public String createUser(Question question, Model model, HttpSession session) {
@@ -49,6 +56,7 @@ public class QuerstionController {
 		return "redirect:/questions"; // get 방식으로  리다이렉션 - Controller를 통해 접근
 	}
 	
+	
 	@GetMapping("/{id}")
 	public String getQuestionById(@PathVariable(value = "id") Long id, Model model) {
 		Question question = questionService.getQuestionById(id);
@@ -57,23 +65,28 @@ public class QuerstionController {
 		model.addAttribute("question", question);
 		return "/questions/info";
 	}
-	@GetMapping("/{id}/form")
+	@GetMapping("/edit/{id}")
 	public String getUpdateForm(@PathVariable(value = "id") Long id, Model model) {
 		Question question = questionService.getQuestionById(id);
 		model.addAttribute("question", question);
-		return "/questions/info";
+		return "/questions/edit";
 	}
 	@PutMapping("/{id}")
 	public String updateQuestionById(@PathVariable(value = "id") Long id, String title, String contents, Model model) {
 		Question question = questionService.getQuestionById(id);
-		questionService.updateQuestion(question);		
+		question.setTitle(title);
+		question.setContents(contents);
+		questionService.updateQuestion(question);
+		model.addAttribute("question", question);
 		return "redirect:/questions/" + id;
 	}
-	@DeleteMapping("/{id}")
+	
+
+	@GetMapping("/del/{id}")
 	public String deleteQuestionById(@PathVariable(value = "id") Long id, Model model) {
 		Question question = questionService.getQuestionById(id);
 		questionService.deleteQuestion(question);
 		model.addAttribute("userId", question.getWriter().getUserId());
-		return "/questions/withdrawal";
+		return "redirect:/questions";
 	}
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+<libraryInfo home="C:\sts-4.2.0.RELEASE\jre" version="1.8.0_181">
+<bootpath>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\resources.jar"/>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\rt.jar"/>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\sunrsasign.jar"/>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\jsse.jar"/>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\jce.jar"/>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\charsets.jar"/>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\jfr.jar"/>
+<entry path="C:\sts-4.2.0.RELEASE\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\ext"/>
+<entry path="C:\WINDOWS\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+<libraryInfo home="C:\sts-4.2.0.RELEASE" version="1.8.0_181">
+<bootpath>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\resources.jar"/>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\rt.jar"/>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\sunrsasign.jar"/>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\jsse.jar"/>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\jce.jar"/>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\charsets.jar"/>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\jfr.jar"/>
+<entry path="C:\sts-4.2.0.RELEASE\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\ext"/>
+<entry path="C:\WINDOWS\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\sts-4.2.0.RELEASE\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+</libraryInfos>
